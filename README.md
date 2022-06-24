@@ -27,7 +27,7 @@ script: 1_deploy.ts {list_of_proposals}
 
 `yarn ts-node --files scripts\Ballot\1_deploy.ts Proposal_1 Proposal_2`
 
-![Deploy](./docs/images/deploy.jpg)
+![Deploy](./docs/images/deploy.JPG)
 
 ## Query Proposals 
 
