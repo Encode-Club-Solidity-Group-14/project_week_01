@@ -1,7 +1,13 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.7.0 <0.9.0;
+/// @title A Smart Contract for Voting & Voting with delegation.
+/// @author William Cisotto, Kashif Malik, Rhen and Team 15
+/// @notice You can use this contract for only the most basic simulation
+/// @dev All function calls are currently implemented without side effects No liability admitted expressly or impliedly and warranty given
+/// @custom: experimental This is an experimental contract.
+/// @param then Documents the parameters like function, event, contract deployed, ballot, setting Chairman, random vote, giveRightToVote , voted, delegate, other address, and ending ballot voting and winning proposal results.  
+/// @return randomvote which is not rounded up for any votes- ballots ,as votes cannot be spilt
 
-/// @title Voting with delegation.
 contract Ballot {
     // This declares a new complex type which will
     // be used for variables later.
