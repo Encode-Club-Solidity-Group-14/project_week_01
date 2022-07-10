@@ -1,8 +1,19 @@
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >=0.8.2 < 0.9.0;
+
+/// @title A Smart Contract for Voting
+/// @author William Cisotto, Kashif Malik, Rhen and Team 15
+/// @notice You can use this contract for only the most basic simulation
+/// @dev All function calls are currently implemented without side effects No liability admitted expressly or impliedly and warranty given
+/// @custom:experimental This is an experimental contract.
 import { expect } from "chai";
 import { ethers } from "hardhat";
-// eslint-disable-next-line node/no-missing-import
+// eslint-disable-next-line node/no-missing-import no wa
 import { Ballot } from "../../typechain";
 
+/// @notice Constant is declared and Proposal variable is stored in Array Proposal 1, Proposal 2 Proposal 3 into 32bytes String
+/// @dev then index is used to increase precision
+/// @param then Documents the parameters like function, event, contract deployed, ballot, setting Chairman, random vote, giveRightToVote , voted, delegate, other address, and ending ballot voting and winning proposal results.   /// @return randomvote which is not rounded up for any votes- ballots ,as votes cannot be spilt
 const PROPOSALS = ["Proposal 1", "Proposal 2", "Proposal 3"];
 
 function convertStringArrayToBytes32(array: string[]) {
