@@ -4,23 +4,17 @@ import * as ballotJson from "../../artifacts/contracts/Ballot.sol/Ballot.json";
 import { Ballot } from "../../typechain";
 import { buildWallet } from "./utils/Wallet";
 
-const EXPOSED_KEY = "NOT_USED";
-
-//Create wallet object
-async function main() {
+export async function castVote(ballotAddress: string, proposalIndex: string) {
+  //Create wallet object
   const signer = await buildWallet();
-  //Index 0 = Path of script, Index 1 = File being executed, Index 2 = Ballot Address, Index 3 = Proposal Index passed in,
-  if (process.argv.length < 3) {
+  //Check for ballotAddress parameter
+  if (ballotAddress === undefined || ballotAddress === "") {
     throw new Error("Ballot address missing");
   }
-  //Index 2 = Ballot Address
-  const ballotAddress = process.argv[2];
-  //Index 3 = Proposal index passed in, is length is less than 4 then no proposal index is passed in
-  if (process.argv.length < 4) {
+  //Check for proposalIndex parameter
+  if (proposalIndex === undefined || proposalIndex === "") {
     throw new Error("Proposal index missing");
   }
-  //Index 3 = Proposal index passed in
-  const proposalIndex = process.argv[3];
   //Display ballot address
   console.log(
     `Attaching ballot contract interface to address ${ballotAddress}`
@@ -37,15 +31,9 @@ async function main() {
   console.log("Proposal chosen: " + ethers.utils.parseBytes32String(proposal));
   //Cast vote by calling vote function passing in proposal index in ballot contract
   const tx = await ballotContract.vote(proposalIndex);
-
   console.log("Awaiting confirmations");
-
   await tx.wait();
   //Display tx hash
   console.log(`Transaction completed. Hash: ${tx.hash}`);
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});

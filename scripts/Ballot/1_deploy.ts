@@ -2,8 +2,6 @@ import { ethers } from "hardhat";
 import * as ballotJson from "../../artifacts/contracts/Ballot.sol/Ballot.json";
 import { buildWallet } from "./utils/Wallet";
 
-const EXPOSED_KEY = "NOT_USED";
-
 //Convert Strings to Bytes32 to save gas fee
 function convertStringArrayToBytes32(array: string[]) {
   const bytes32Array = [];
@@ -13,24 +11,18 @@ function convertStringArrayToBytes32(array: string[]) {
   return bytes32Array;
 }
 
-//Create wallet object
-async function main() {
+export async function deploy(proposals: string[]) {
   const signer = await buildWallet();
-
   console.log("Deploying Ballot contract");
   console.log("Proposals: ");
-
-  //Index 0 = Path of script, Index 1 = File being executed, Index 2 = Proposal passed in
-  const proposals = process.argv.slice(2);
   //If length is under 2 no proposal is provided
-  if (proposals.length < 2){
+  if (proposals.length < 2) {
     throw new Error("Not enough proposals provided");
-  } 
+  }
   //For each proposal display proposal name and index position
   proposals.forEach((element, index) => {
     console.log(`Proposal N. ${index + 1}: ${element}`);
   });
-
   //Deploy contract to blockchain obtaining abi and bytecode from ballot.json
   const ballotFactory = new ethers.ContractFactory(
     ballotJson.abi,
@@ -41,7 +33,6 @@ async function main() {
   const ballotContract = await ballotFactory.deploy(
     convertStringArrayToBytes32(proposals)
   );
-
   console.log("Awaiting confirmations");
   //Contract deployed
   await ballotContract.deployed();
@@ -49,8 +40,3 @@ async function main() {
   console.log("Completed");
   console.log(`Contract deployed at ${ballotContract.address}`);
 }
-
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
