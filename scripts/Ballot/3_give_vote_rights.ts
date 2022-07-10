@@ -44,7 +44,7 @@ async function main() {
   ) as Ballot;
   //Set chairpersonAddress as address defined in chairperson function in ballotContract
   const chairpersonAddress = await ballotContract.chairperson();
-  //If chairpersonAddress is not the address interacting with the contract throw erroe
+  //If chairpersonAddress is not the address interacting with the contract throw erroe  (Wiiliam here is typo with e at end of error it needs correcting kas)
   if (chairpersonAddress !== signer.address) {
     throw new Error("Caller is not the chairperson for this contract");
   }
