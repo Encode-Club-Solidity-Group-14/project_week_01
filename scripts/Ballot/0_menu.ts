@@ -59,7 +59,7 @@ function menuOptions(rl: readline.Interface) {
           break;
         case 2:
           rl.question("Input ballot address\n", async (ballotAddress) => {
-            rl.question("Input proposal to query\n", async (proposalIndex) => {
+            rl.question("Input proposal index number\n", async (proposalIndex) => {
               try {
                 await queryProposal(ballotAddress, proposalIndex);
               } catch (error) {
